@@ -75,7 +75,13 @@ class ImgProcessor:
         plt.title('Laplacian'), plt.xticks([]), plt.yticks([])
 
         plt.show()
-        
+
+    def img_threshold(self):
+        if self.img is None:
+            return f"No se puede cargar la imagen: {self.img}"
+        _, thresh = cv2.threshold(self.img, 128,255, cv2.THRESH_BINARY_INV)
+
+        return thresh
 
     def img_seg_thresholding(self):
         umbral_adaptativo = cv2.adaptiveThreshold(self.img, 255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11,2)
