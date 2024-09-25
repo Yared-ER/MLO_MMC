@@ -1,7 +1,8 @@
 import sys
-from matplotlib import pyplot as plt
 from imgpross.imgprocessor import ImgProcessor
 from plots.imgplots.imgplots import ImgPlots
+from imgpross.seg_mastografia import SegImg
+import cv2
 
 def infoMap(info):
     if info:
@@ -13,10 +14,18 @@ def infoMap(info):
 
 
 if __name__ == "__main__":
-    img_prossR = ImgProcessor(sys.argv[1])
-    img_prossL = ImgProcessor(sys.argv[2])
-    
-    plotsImgs =  ImgPlots(img_prossR.img, img_prossL.img)
+    # Obtiene la imagen pasada por terminal
+    img = sys.argv[1]
 
-    plotsImgs.orig_dilation(img_prossR.img_dilation(),img_prossL.img_dilation())
+    imgOrig = cv2.imread(img)
+    segImgPross = SegImg(img)
+
+    morphImg = segImgPross.seg_img_morph()
+
+    plotOrgMorph = ImgPlots()
+
+    #graficar imagen original y la morphologica
+    plotOrgMorph.graficar_imagenes_dic(morphImg)
+
+
 
