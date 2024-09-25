@@ -51,7 +51,11 @@ class ImgPlots:
         for i,(title, imagen) in enumerate(diccionarioImagenes.items()):
             plt.subplot(rows, 2,i + 1)
             plt.title(title)
-            plt.imshow(imagen)
-        
+
+            if len(imagen.shape) == 2:
+                plt.imshow(imagen, cmap='gray')
+            else:
+                plt.imshow(imagen)
+            plt.axis('off')
         plt.tight_layout()
         plt.show()
