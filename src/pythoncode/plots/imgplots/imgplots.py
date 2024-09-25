@@ -1,89 +1,57 @@
 from matplotlib import pyplot as plt
-
+import math
 class ImgPlots:
 
-    def __init__(self, originalR, originalL):
-        self.imgOriginalR = originalR
-        self.imgOriginalL = originalL
-
-    def orig_gradiente(self, gradienteR, gradienteL):
+    def graficar_org_mdf(self, imagenOrg, tituloOrg, imagenMdf, tituloMdf):
         plt.subplot(2,2,1)
-        plt.imshow(self.imgOriginalR)
-        plt.title('Original Derecha')
+        plt.imshow(imagenOrg)
+        plt.title(tituloOrg)
 
         plt.subplot(2,2,2)
-        plt.imshow(gradienteR)
-        plt.title('IMG Gradiente Derecha')
-
-        plt.subplot(2,2,3)
-        plt.imshow(self.imgOriginalL)
-        plt.title('Original Izquierda')
-
-        plt.subplot(2,2,4)
-        plt.imshow(gradienteL)
-        plt.title('IMG Gradiente Izquierda')
+        plt.imshow(imagenMdf)
+        plt.title(tituloMdf)
 
         plt.tight_layout()
         plt.show()
 
-    def orig_dilation(self, dilationR, dilationL):
+    def graficar_IMG(self, imagen, titulo):
+        plt.imshow(imagen, cmap='gray')
+        plt.title(titulo)
+        plt.show()
+
+    def graficar_4_img(self, img1, img2, img3, img4, titulo1, titulo2, titulo3, titulo4):
         plt.subplot(2,2,1)
-        plt.imshow(self.imgOriginalR)
-        plt.title('Original Derecha')
+        plt.imshow(img1)
+        plt.title(titulo1)
 
         plt.subplot(2,2,2)
-        plt.imshow(dilationR)
-        plt.title('IMG Dilation Derecha')
-
+        plt.imshow(img2)
+        plt.title(titulo2)
+    
         plt.subplot(2,2,3)
-        plt.imshow(self.imgOriginalL)
-        plt.title('Original Izquierda')
+        plt.imshow(img3)
+        plt.title(titulo3)
 
         plt.subplot(2,2,4)
-        plt.imshow(dilationL)
-        plt.title('IMG Dilation Izquierda')
+        plt.imshow(img4)
+        plt.title(titulo4)
 
         plt.tight_layout()
         plt.show()
 
-    def orig_erosion(self, erosionR, erosionL):
-        plt.subplot(2,2,1)
-        plt.imshow(self.imgOriginalR)
-        plt.title('Original Derecha')
+    def graficar_imagenes_dic(self, diccionarioImagenes):
+        if diccionarioImagenes is None:
+            return f"No contiene valores el diccionario: {diccionarioImagenes}"
+        
+        num_images = len(diccionarioImagenes)
+        rows = math.ceil(num_images / 2)
 
-        plt.subplot(2,2,2)
-        plt.imshow(erosionR)
-        plt.title('IMG Erosion Derecha')
+        plt.figure(figsize=(10,5 * rows))
 
-        plt.subplot(2,2,3)
-        plt.imshow(self.imgOriginalL)
-        plt.title('Original Izquierda')
-
-        plt.subplot(2,2,4)
-        plt.imshow(erosionL)
-        plt.title('IMG Erosion Izquierda')
-
+        for i,(title, imagen) in enumerate(diccionarioImagenes.items()):
+            plt.subplot(rows, 2,i + 1)
+            plt.title(title)
+            plt.imshow(imagen)
+        
         plt.tight_layout()
         plt.show()
-
-    def orig_open(self, openingR, openingL):
-        plt.subplot(2,2,1)
-        plt.imshow(self.imgOriginalR)
-        plt.title('Original Derecha')
-
-        plt.subplot(2,2,2)
-        plt.imshow(openingR)
-        plt.title('IMG Opening Derecha')
-
-        plt.subplot(2,2,3)
-        plt.imshow(self.imgOriginalL)
-        plt.title('Original Izquierda')
-
-        plt.subplot(2,2,4)
-        plt.imshow(openingL)
-        plt.title('IMG Opening Izquierda')
-
-        plt.tight_layout()
-        plt.show()
-
-
